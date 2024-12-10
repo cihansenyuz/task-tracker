@@ -11,6 +11,7 @@ class Task{
     static std::string StatusToStr(Status s);
 
     std::string ToString() const;
+    void Updated();
 
     int GetID() const;
     std::string GetDescription() const;
@@ -31,5 +32,7 @@ class Task{
     Status status;
     std::tm created;
     std::tm updated;
+
+    
 
 };

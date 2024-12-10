@@ -8,6 +8,9 @@ Task::Task(std::string d)
     auto now = std::chrono::system_clock::now(); // get current time
     std::time_t current_time = std::chrono::system_clock::to_time_t(now); // convert to time_t
     created = *std::localtime(&current_time);
+    ////////////////////////
+    created.tm_mday -= 3; // debug purposed
+    ////////////////////////
     updated = created;
 
 }
@@ -22,6 +25,13 @@ std::string Task::ToString() const{
                     + '-' + std::to_string(updated.tm_mon+1)
                     + '-' + std::to_string(updated.tm_year+1900) + "\n";
     return output;
+}
+
+
+void Task::Updated(){
+    auto now = std::chrono::system_clock::now(); // get current time
+    std::time_t current_time = std::chrono::system_clock::to_time_t(now); // convert to time_t
+    updated = *std::localtime(&current_time);
 }
 
 std::string Task::StatusToStr(Status s){
