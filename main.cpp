@@ -5,10 +5,10 @@
     #include <iostream>
 #endif
 /**
- * place where all development tests can be performed
+ * this is where all development tests can be performed
  */
 void ExecDevMode(){
-    Task test{"this is test task."};
+    Task test{"this is a test task."};
     std::cout << test.ToString() << std::endl;
 }
 
