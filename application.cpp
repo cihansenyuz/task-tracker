@@ -7,8 +7,7 @@ void Application::Exec(){
 
     while(running){
         PrintMenu();
-        // get user input
-        // process user input
+        ProcessSelection(GetUserInput());
     }
 }
 
@@ -82,3 +81,5 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
     
     return convertion_map[s];
 }
+
+ Application::~Application(){ std::cout << "Quitting the app..." << std::endl; }
