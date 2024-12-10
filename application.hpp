@@ -8,9 +8,11 @@ class Application{
 
     private:
     bool running{false};
-    enum Selection{ QUIT, OPT1, OPT2 };
+    enum Selection{ QUIT, ADD, UPDATE, DELETE, LIST_ALL, LIST_DONE, LIST_NDONE, LIST_ONGOING };
 
     void PrintMenu() const;
-    Selection GetUserInput();
+    Selection GetUserInput() const;
+    void ProcessSelection(Selection user_selection);
     Selection StrToSelection(const std::string& s) const;
 };
+
