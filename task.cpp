@@ -10,3 +10,14 @@ Task::Task(std::string d)
     created = *std::localtime(&current_time);
 
 }
+
+int Task::GetID() const { return id; }
+Task::Status Task::GetStatus() const { return status; }
+std::tm Task::GetCreated() const { return created; }
+std::tm Task::GetUpdated() const { return updated; }
+void Task::SetID(int id) { this->id = id; }
+void Task::SetDescription(std::string descrp) { this->descrp = descrp; }
+void Task::SetStatus(Status status) { this->status = status; }
+void Task::SetCreated(std::tm created) { this->created = created; }
+void Task::SetUpdated(std::tm updated) { this->updated = updated; }
+
