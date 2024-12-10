@@ -15,10 +15,16 @@ bool TaskManager::UpdateTask(int id, UpdateInfo info){
     return false;
 }
 
+void TaskManager::DeleteTask(int id){
+    tasks.remove_if([id](Task* t){
+                            return t->GetID() == id;
+                        });
+}
+
 const Task* TaskManager::GetTask(int id) const{
     for(const auto& task : tasks)
         if(task->GetID() == id)
             return task;
     
-    return nullptr;
+    throw std::exception{}; // not found
 }

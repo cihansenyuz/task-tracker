@@ -13,6 +13,7 @@ class TaskManager{
     TaskManager() = default;
     void AddTask(const std::string& description);
     bool UpdateTask(int id, UpdateInfo info);
+    void DeleteTask(int id);
 
     const Task* GetTask(int id) const;
 
