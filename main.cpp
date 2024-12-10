@@ -13,6 +13,7 @@ void ExecDevMode(){
                                   << test.created.tm_mon+1 << '-'
                                   << test.created.tm_year+1900
                                   << std::endl;
+    std::cout << "id: " << test.id << std::endl;
 }
 
 int main(){

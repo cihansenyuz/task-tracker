@@ -5,14 +5,16 @@
 
 class Task{
     public:
-    Task(std::string d);
+    Task(std::string descrp);
 
     enum Status{ TODO, ONGOING, DONE };
 
-    std::string id;
+    int id;
     std::string descrp;
     Status status;
     std::tm created;
     std::tm updated;
+    
+    private:
+    static int id_count;
 };
-
