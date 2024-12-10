@@ -1,6 +1,7 @@
 #pragma once
 
 #include <forward_list>
+#include <vector>
 #include "task.hpp"
 
 struct UpdateInfo {
@@ -16,6 +17,7 @@ class TaskManager{
     void DeleteTask(int id);
 
     const Task* GetTask(int id) const;
+    std::vector<int> GetIdByStatus(Task::Status status) const;
 
     private:
     std::forward_list<Task*> tasks;

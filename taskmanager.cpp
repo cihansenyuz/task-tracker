@@ -1,4 +1,5 @@
 #include "taskmanager.hpp"
+#include <algorithm>
 
 void TaskManager::AddTask(const std::string& description){
     tasks.emplace_front(new Task{description});
@@ -27,4 +28,13 @@ const Task* TaskManager::GetTask(int id) const{
             return task;
     
     throw std::exception{}; // not found
+}
+
+std::vector<int> TaskManager::GetIdByStatus(Task::Status status) const{
+    std::vector<int> task_id_vector;
+    for(const auto& task : tasks)
+        if(task->GetStatus() == status)
+            task_id_vector.push_back(task->GetID());
+
+    return task_id_vector;
 }
