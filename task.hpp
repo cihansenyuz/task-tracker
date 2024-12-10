@@ -8,6 +8,9 @@ class Task{
     Task(std::string descrp);
 
     enum Status{ TODO, ONGOING, DONE };
+    static std::string StatusToStr(Status s);
+
+    std::string ToString() const;
 
     int GetID() const;
     std::string GetDescription() const;
@@ -28,7 +31,5 @@ class Task{
     Status status;
     std::tm created;
     std::tm updated;
-
-    public:
 
 };

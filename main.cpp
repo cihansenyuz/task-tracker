@@ -9,11 +9,7 @@
  */
 void ExecDevMode(){
     Task test{"this is test task."};
-    std::cout << "created date: " << test.created.tm_mday << '-'
-                                  << test.created.tm_mon+1 << '-'
-                                  << test.created.tm_year+1900
-                                  << std::endl;
-    std::cout << "id: " << test.id << std::endl;
+    std::cout << test.ToString() << std::endl;
 }
 
 int main(){
