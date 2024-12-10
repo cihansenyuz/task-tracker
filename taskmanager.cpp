@@ -4,7 +4,7 @@ void TaskManager::AddTask(const std::string& description){
     tasks.emplace_front(new Task{description});
 }
 
-Task* TaskManager::GetTask(int id) const{
+const Task* TaskManager::GetTask(int id) const{
     for(const auto& task : tasks)
         if(task->GetID() == id)
             return task;

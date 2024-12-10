@@ -11,7 +11,7 @@ void ExecDevMode(){
 
     TaskManager tMan;
     tMan.AddTask("this is another test task.");
-    Task* selected_task = tMan.GetTask(3);
+    const Task* selected_task = tMan.GetTask(3);
     if(selected_task)
         std::cout << selected_task->ToString() << std::endl;
     else

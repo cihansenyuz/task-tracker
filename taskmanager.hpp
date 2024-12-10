@@ -8,7 +8,7 @@ class TaskManager{
     TaskManager() = default;
     void AddTask(const std::string& description);
 
-    Task* GetTask(int id) const;
+    const Task* GetTask(int id) const;
 
     private:
     std::forward_list<Task*> tasks;
