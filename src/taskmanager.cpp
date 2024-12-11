@@ -7,12 +7,10 @@ TaskManager::TaskManager(const std::string& file_path) : file_path{file_path} {
 
 TaskManager::~TaskManager(){
     file_man.SaveTasksToLocal(file_path);
-    for(auto& task : tasks)
-        delete task;
 }
 
 int TaskManager::AddTask(const std::string& description){
-    tasks.emplace_front(new Task{description});
+    tasks.emplace_front(std::make_shared<Task>(description));
     return tasks.front()->GetID();
 }
 
@@ -28,15 +26,15 @@ bool TaskManager::UpdateTask(int id, UpdateInfo info){
 }
 
 void TaskManager::DeleteTask(int id){
-    tasks.remove_if([id](Task* t){
+    tasks.remove_if([id](std::shared_ptr<Task> t){
                             return t->GetID() == id;
                         });
 }
 
-const Task* TaskManager::GetTask(int id) const{
+const std::shared_ptr<Task> TaskManager::GetTask(int id) const{
     for(const auto& task : tasks)
         if(task->GetID() == id)
-            return task;
+            return std::shared_ptr<Task>(task);
     
     throw std::exception{}; // not found
 }

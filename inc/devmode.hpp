@@ -41,7 +41,10 @@ void ExecDevMode(){
         //     std::cout << tMan.GetTask(id)->ToString() << std::endl;
 
         for(int i=1; i<=5; i++)
-            try { std::cout << tMan.GetTask(i)->ToString() << std::endl; }
+            try {
+                std::cout << tMan.GetTask(i)->ToString() << std::endl;
+                std::cout << "use count: " << tMan.GetTask(i).use_count() << std::endl;
+            }
             catch(const std::exception& e) { std::cout << "invalid task id: " << i << std::endl; }
 
         // std::cout << Task::TmDateToStr(Task::StrToTmDate("25-11-2024")) << std::endl;

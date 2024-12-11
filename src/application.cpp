@@ -89,11 +89,10 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
 }
 
  Application::Application(const std::string& file_path)
-    : task_manager{new TaskManager{file_path}} {
+    : task_manager{std::make_unique<TaskManager>(file_path)} {
     std::cout << "Loading the app..." << std::endl;
 }
 
  Application::~Application(){ 
-    delete task_manager;
     std::cout << "Quitting the app..." << std::endl;
 }

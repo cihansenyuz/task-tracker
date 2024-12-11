@@ -2,6 +2,7 @@
 
 #include "taskmanager.hpp"
 #include <string>
+#include <memory>
 
 class Application{
     public:
@@ -14,7 +15,7 @@ class Application{
     bool running{false};
     enum Selection{ QUIT, ADD, UPDATE, DELETE,
                 LIST_ALL, LIST_DONE, LIST_NDONE, LIST_ONGOING };
-    TaskManager* task_manager;
+    std::unique_ptr<TaskManager> task_manager;
 
     void PrintMenu() const;
     Selection GetUserInput() const;

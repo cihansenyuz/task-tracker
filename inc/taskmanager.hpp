@@ -2,6 +2,7 @@
 
 #include <forward_list>
 #include <vector>
+#include <memory>
 #include "task.hpp"
 #include "jsonfilemanager.hpp"
 
@@ -19,12 +20,12 @@ class TaskManager{
     bool UpdateTask(int id, UpdateInfo info);
     void DeleteTask(int id);
 
-    const Task* GetTask(int id) const;
+    const std::shared_ptr<Task> GetTask(int id) const;
     std::vector<int> GetIdByStatus(Task::Status status) const;
     std::vector<int> GetAllIds() const;
 
     private:
-    std::forward_list<Task*> tasks;
+    std::forward_list<std::shared_ptr<Task>> tasks;
     JsonFileManager file_man{&tasks};
     std::string file_path;
 };

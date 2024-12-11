@@ -2,7 +2,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
-JsonFileManager::JsonFileManager(std::forward_list<Task*>* t)
+JsonFileManager::JsonFileManager(std::forward_list<std::shared_ptr<Task>>* t)
     : tasks{t} {}
 
 bool JsonFileManager::SaveTasksToLocal(const std::string& file_path) const{
@@ -30,7 +30,7 @@ bool JsonFileManager::LoadTasksFromLocal(const std::string& file_path){
     for(const auto& task : file){
         const auto& task_data = task.second;
 
-        tasks->emplace_front(ParseJsonTaskData(task_data));
+        tasks->emplace_front(std::move(ParseJsonTaskData(task_data)));
         int current_id = tasks->front()->GetID();
         if(current_id > last_id)
             last_id = current_id;
@@ -40,15 +40,14 @@ bool JsonFileManager::LoadTasksFromLocal(const std::string& file_path){
     return true;
 }
 
-Task* JsonFileManager::ParseJsonTaskData(const ptree& task_data) const{
-        return new Task{
+std::unique_ptr<Task> JsonFileManager::ParseJsonTaskData(const ptree& task_data) const{
+        return std::make_unique<Task>(
                         task_data.get<int>("id"),
                         task_data.get<std::string>("description"),
                         Task::StrToStatus(task_data.get<std::string>("status")),
                         Task::StrToTmDate(task_data.get<std::string>("created date")),
                         Task::StrToTmDate(task_data.get<std::string>("last update"))
-                    };
-
+                    );
 }
 
 ptree JsonFileManager::LoadFile(const std::string& file_path) const{
