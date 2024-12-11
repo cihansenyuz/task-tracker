@@ -27,6 +27,17 @@ std::string Task::ToString() const{
     return output;
 }
 
+boost::property_tree::ptree Task::ToJson() const{
+    boost::property_tree::ptree json_tree;
+    json_tree.put("id", id);
+    json_tree.put("description", descrp);
+    json_tree.put("status", StatusToStr(status));
+    //json_tree.put("created date", created);
+    //json_tree.put("last update", updated);
+
+    return json_tree;
+}
+
 
 void Task::Updated(){
     auto now = std::chrono::system_clock::now(); // get current time

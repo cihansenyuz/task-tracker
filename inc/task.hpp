@@ -2,6 +2,7 @@
 
 #include <string>
 #include <chrono>
+#include <boost/property_tree/ptree.hpp>
 
 class Task{
     public:
@@ -11,6 +12,7 @@ class Task{
     static std::string StatusToStr(Status s);
 
     std::string ToString() const;
+    boost::property_tree::ptree ToJson() const;
     void Updated();
 
     int GetID() const;

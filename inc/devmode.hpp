@@ -1,6 +1,8 @@
 #include "task.hpp"
 #include "taskmanager.hpp"
 #include <iostream>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 /**
  * this is where all development tests can be performed
@@ -32,9 +34,18 @@ void ExecDevMode(){
     //     try { std::cout << tMan.GetTask(i)->ToString() << std::endl; }
     //     catch(const std::exception& e) { std::cout << "invalid task id: " << i << std::endl; }
 
-    std::cout << "list of TODOs:" << std::endl;
-    auto ids = tMan.GetIdByStatus(Task::Status::TODO);
-    for(const auto id : ids)
-        std::cout << tMan.GetTask(id)->ToString() << std::endl;
+    // std::cout << "list of TODOs:" << std::endl;
+    // auto ids = tMan.GetIdByStatus(Task::Status::TODO);
+    // for(const auto id : ids)
+    //     std::cout << tMan.GetTask(id)->ToString() << std::endl;
+
+    
+    try {
+        write_json("example_task.json", selected_task->ToJson());
+        std::cout << "JSON file 'example_task.json' created successfully!" << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error writing JSON: " << e.what() << std::endl;
+    }
     
 }
