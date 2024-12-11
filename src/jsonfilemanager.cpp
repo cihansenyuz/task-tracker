@@ -5,7 +5,7 @@
 JsonFileManager::JsonFileManager(std::forward_list<Task*>* t)
     : tasks{t} {}
 
-bool JsonFileManager::SaveTasksToLocal() const{
+bool JsonFileManager::SaveTasksToLocal(const std::string& file_path) const{
     ptree json_array;
 
     for(const auto& task : *tasks){
@@ -15,8 +15,7 @@ bool JsonFileManager::SaveTasksToLocal() const{
     json_root.add_child("tasks", json_array);
 
     try {
-        boost::property_tree::write_json("saved-tasks.json",
-                                        json_root);
+        boost::property_tree::write_json(file_path, json_root);
         return true;
     }
     catch (const std::exception& e) {

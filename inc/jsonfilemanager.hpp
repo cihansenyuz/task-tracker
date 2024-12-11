@@ -9,7 +9,7 @@ class JsonFileManager{
     public:
     JsonFileManager(std::forward_list<Task*>* t);
 
-    bool SaveTasksToLocal() const;
+    bool SaveTasksToLocal(const std::string& file_path) const;
     bool LoadTasksFromLocal(const std::string& file_path);
 
     private:

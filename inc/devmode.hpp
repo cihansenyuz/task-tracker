@@ -6,9 +6,11 @@
  * this is where all development tests can be performed
  */
 void ExecDevMode(){
+    constexpr char FILE_PATH[] = "saved-tasks.json";
+    
     try{
-        TaskManager tMan;
-        tMan.AddTask("this is 7nd test task.");
+        TaskManager tMan{FILE_PATH};
+        // tMan.AddTask("this is 7nd test task.");
         // const Task* selected_task = tMan.GetTask(1);
         // if(selected_task)
         //     std::cout << selected_task->ToString() << std::endl;

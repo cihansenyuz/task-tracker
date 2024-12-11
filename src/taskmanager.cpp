@@ -1,16 +1,12 @@
 #include "taskmanager.hpp"
-#include "jsonfilemanager.hpp"
-
 #include <algorithm>
 
-TaskManager::TaskManager(){
-    JsonFileManager file_man{&tasks};
-    file_man.LoadTasksFromLocal("saved-tasks.json");
+TaskManager::TaskManager(const std::string& file_path) : file_path{file_path} {
+    file_man.LoadTasksFromLocal(file_path);
 }
 
 TaskManager::~TaskManager(){
-    JsonFileManager file_man{&tasks};
-    file_man.SaveTasksToLocal();
+    file_man.SaveTasksToLocal(file_path);
 }
 
 void TaskManager::AddTask(const std::string& description){

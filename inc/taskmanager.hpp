@@ -3,6 +3,7 @@
 #include <forward_list>
 #include <vector>
 #include "task.hpp"
+#include "jsonfilemanager.hpp"
 
 struct UpdateInfo {
     std::string description;
@@ -11,9 +12,9 @@ struct UpdateInfo {
 
 class TaskManager{
     public:
-    TaskManager();
+    TaskManager(const std::string& file_path);
     ~TaskManager();
-    
+
     void AddTask(const std::string& description);
     bool UpdateTask(int id, UpdateInfo info);
     void DeleteTask(int id);
@@ -24,5 +25,6 @@ class TaskManager{
 
     private:
     std::forward_list<Task*> tasks;
-    
+    JsonFileManager file_man{&tasks};
+    std::string file_path;
 };
