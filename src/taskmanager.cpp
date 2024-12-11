@@ -1,5 +1,7 @@
 #include "taskmanager.hpp"
 #include <algorithm>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 void TaskManager::AddTask(const std::string& description){
     tasks.emplace_front(new Task{description});
@@ -45,4 +47,22 @@ std::vector<int> TaskManager::GetAllIds() const{
         task_id_vector.push_back(task->GetID());
 
     return task_id_vector;
+}
+
+std::string TaskManager::SaveTasksToLocal() const{
+    boost::property_tree::ptree json_array;
+
+    for(const auto& task : tasks){
+        json_array.push_back(std::make_pair("", task->ToJson()));
+    }
+    boost::property_tree::ptree json_root;
+    json_root.add_child("tasks", json_array);
+
+    try {
+        boost::property_tree::write_json("saved-tasks.json", json_root);
+        return "Tasks are saved to local successfully!";
+    }
+    catch (const std::exception& e) {
+        throw e;
+    }
 }

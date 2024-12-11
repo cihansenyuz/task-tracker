@@ -20,6 +20,9 @@ class TaskManager{
     std::vector<int> GetIdByStatus(Task::Status status) const;
     std::vector<int> GetAllIds() const;
 
+    std::string SaveTasksToLocal() const;
+
     private:
     std::forward_list<Task*> tasks;
+    
 };
