@@ -11,7 +11,9 @@ struct UpdateInfo {
 
 class TaskManager{
     public:
-    TaskManager() = default;
+    TaskManager();
+    ~TaskManager();
+    
     void AddTask(const std::string& description);
     bool UpdateTask(int id, UpdateInfo info);
     void DeleteTask(int id);
@@ -19,9 +21,6 @@ class TaskManager{
     const Task* GetTask(int id) const;
     std::vector<int> GetIdByStatus(Task::Status status) const;
     std::vector<int> GetAllIds() const;
-
-    bool SaveTasksToLocal() const;
-    bool LoadTasksFromLocal(const std::string& file_path);
 
     private:
     std::forward_list<Task*> tasks;

@@ -1,7 +1,17 @@
 #include "taskmanager.hpp"
+#include "jsonfilemanager.hpp"
+
 #include <algorithm>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+
+TaskManager::TaskManager(){
+    JsonFileManager file_man{&tasks};
+    file_man.LoadTasksFromLocal("saved-tasks.json");
+}
+
+TaskManager::~TaskManager(){
+    JsonFileManager file_man{&tasks};
+    file_man.SaveTasksToLocal();
+}
 
 void TaskManager::AddTask(const std::string& description){
     tasks.emplace_front(new Task{description});
@@ -49,47 +59,3 @@ std::vector<int> TaskManager::GetAllIds() const{
     return task_id_vector;
 }
 
-bool TaskManager::SaveTasksToLocal() const{
-    boost::property_tree::ptree json_array;
-
-    for(const auto& task : tasks){
-        json_array.push_back(std::make_pair("", task->ToJson()));
-    }
-    boost::property_tree::ptree json_root;
-    json_root.add_child("tasks", json_array);
-
-    try {
-        boost::property_tree::write_json("saved-tasks.json", json_root);
-        return true;
-    }
-    catch (const std::exception& e) {
-        throw e;
-    }
-}
-
-bool TaskManager::LoadTasksFromLocal(const std::string& file_path){
-    boost::property_tree::ptree json_root;
-
-    try {
-        boost::property_tree::read_json(file_path, json_root);
-    }
-    catch (const std::exception& e) {
-        throw e;
-    }
-
-    boost::property_tree::ptree tasks_from_file = json_root.get_child("tasks");
-    
-    for(const auto& task : tasks_from_file){
-        const auto& task_data = task.second;
-
-        tasks.emplace_front(new Task{
-                                    task_data.get<int>("id"),
-                                    task_data.get<std::string>("description"),
-                                    Task::StrToStatus(task_data.get<std::string>("status")),
-                                    Task::StrToTmDate(task_data.get<std::string>("created date")),
-                                    Task::StrToTmDate(task_data.get<std::string>("last update"))
-                                }
-                            );
-    }
-    return true;
-}

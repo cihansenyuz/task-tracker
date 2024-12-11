@@ -33,6 +33,7 @@ class Task{
     void SetStatus(Status status);
     void SetCreated(std::tm created);
     void SetUpdated(std::tm updated);
+    static void SetLastIdCount(int n);
 
     private:
     static int id_count;

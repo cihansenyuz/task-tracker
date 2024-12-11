@@ -76,6 +76,7 @@ void Task::SetDescription(std::string descrp) { this->descrp = descrp; }
 void Task::SetStatus(Status status) { this->status = status; }
 void Task::SetCreated(std::tm created) { this->created = created; }
 void Task::SetUpdated(std::tm updated) { this->updated = updated; }
+void Task::SetLastIdCount(int n) { id_count = n; }
 
 std::tm Task::StrToTmDate(const std::string& date){
     std::tm tm_date;
