@@ -4,8 +4,10 @@
     #include "devmode.hpp"
 #endif
 
+constexpr char FILE_PATH[] = "saved-tasks.json";
+
 int main(){
-    Application app;
+    Application app{FILE_PATH};
 
 #if defined(DEVMODE)
     ExecDevMode();

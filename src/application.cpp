@@ -36,9 +36,15 @@ void Application::ProcessSelection(Application::Selection user_selection){
             case Selection::QUIT:
                 running = false;
                 break;
-            case Selection::ADD:
-                /* code */
+            case Selection::ADD: {
+                std::cout << "Enter the description: ";
+                std::string input;
+                std::getline(std::cin, input);
+                int task_id = task_manager->AddTask(input);
+                std::cout << "Created task:" << std::endl;
+                std::cout << task_manager->GetTask(task_id)->ToString() << std::endl;
                 break;
+            }
             case Selection::UPDATE:
                 /* code */
                 break;
@@ -82,4 +88,12 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
     return convertion_map[s];
 }
 
- Application::~Application(){ std::cout << "Quitting the app..." << std::endl; }
+ Application::Application(const std::string& file_path)
+    : task_manager{new TaskManager{file_path}} {
+    std::cout << "Loading the app..." << std::endl;
+}
+
+ Application::~Application(){ 
+    delete task_manager;
+    std::cout << "Quitting the app..." << std::endl;
+}

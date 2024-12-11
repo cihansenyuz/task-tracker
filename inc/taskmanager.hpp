@@ -15,7 +15,7 @@ class TaskManager{
     TaskManager(const std::string& file_path);
     ~TaskManager();
 
-    void AddTask(const std::string& description);
+    int AddTask(const std::string& description);
     bool UpdateTask(int id, UpdateInfo info);
     void DeleteTask(int id);
 

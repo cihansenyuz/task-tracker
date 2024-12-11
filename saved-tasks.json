@@ -41,6 +41,13 @@
             "status": "ONGOING",
             "created date": "08-12-2024\n",
             "last update": "10-12-2024\n"
+        },
+        {
+            "id": "8",
+            "description": "This is user created task",
+            "status": "TODO",
+            "created date": "08-12-2024\n",
+            "last update": "08-12-2024\n"
         }
     ]
 }

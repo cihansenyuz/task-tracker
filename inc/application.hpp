@@ -1,17 +1,20 @@
 #pragma once
 
+#include "taskmanager.hpp"
 #include <string>
 
 class Application{
     public:
-    Application() = default;
+    Application(const std::string& f);
     ~Application();
     void Exec();
     void Quit();
 
     private:
     bool running{false};
-    enum Selection{ QUIT, ADD, UPDATE, DELETE, LIST_ALL, LIST_DONE, LIST_NDONE, LIST_ONGOING };
+    enum Selection{ QUIT, ADD, UPDATE, DELETE,
+                LIST_ALL, LIST_DONE, LIST_NDONE, LIST_ONGOING };
+    TaskManager* task_manager;
 
     void PrintMenu() const;
     Selection GetUserInput() const;

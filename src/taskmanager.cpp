@@ -7,10 +7,13 @@ TaskManager::TaskManager(const std::string& file_path) : file_path{file_path} {
 
 TaskManager::~TaskManager(){
     file_man.SaveTasksToLocal(file_path);
+    for(auto& task : tasks)
+        delete task;
 }
 
-void TaskManager::AddTask(const std::string& description){
+int TaskManager::AddTask(const std::string& description){
     tasks.emplace_front(new Task{description});
+    return tasks.front()->GetID();
 }
 
 bool TaskManager::UpdateTask(int id, UpdateInfo info){
