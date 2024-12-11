@@ -49,7 +49,7 @@ std::vector<int> TaskManager::GetAllIds() const{
     return task_id_vector;
 }
 
-std::string TaskManager::SaveTasksToLocal() const{
+bool TaskManager::SaveTasksToLocal() const{
     boost::property_tree::ptree json_array;
 
     for(const auto& task : tasks){
@@ -60,9 +60,36 @@ std::string TaskManager::SaveTasksToLocal() const{
 
     try {
         boost::property_tree::write_json("saved-tasks.json", json_root);
-        return "Tasks are saved to local successfully!";
+        return true;
     }
     catch (const std::exception& e) {
         throw e;
     }
+}
+
+bool TaskManager::LoadTasksFromLocal(const std::string& file_path){
+    boost::property_tree::ptree json_root;
+
+    try {
+        boost::property_tree::read_json(file_path, json_root);
+    }
+    catch (const std::exception& e) {
+        throw e;
+    }
+
+    boost::property_tree::ptree tasks_from_file = json_root.get_child("tasks");
+    
+    for(const auto& task : tasks_from_file){
+        const auto& task_data = task.second;
+
+        tasks.emplace_front(new Task{
+                                    task_data.get<int>("id"),
+                                    task_data.get<std::string>("description"),
+                                    Task::StrToStatus(task_data.get<std::string>("status")),
+                                    Task::StrToTmDate(task_data.get<std::string>("created date")),
+                                    Task::StrToTmDate(task_data.get<std::string>("last update"))
+                                }
+                            );
+    }
+    return true;
 }

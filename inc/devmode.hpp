@@ -27,7 +27,7 @@ void ExecDevMode(){
     tMan.UpdateTask(4, UpdateInfo{tMan.GetTask(4)->GetDescription(),
                                   Task::Status::DONE});
 
-    tMan.DeleteTask(2);
+    // tMan.DeleteTask(2);
     // for(int i=1; i<=6; i++)
     //     try { std::cout << tMan.GetTask(i)->ToString() << std::endl; }
     //     catch(const std::exception& e) { std::cout << "invalid task id: " << i << std::endl; }
@@ -38,6 +38,14 @@ void ExecDevMode(){
     //     std::cout << tMan.GetTask(id)->ToString() << std::endl;
 
     std::cout << "saving..." << std::endl;
-    std::cout << tMan.SaveTasksToLocal() << std::endl;
+    std::cout << (tMan.SaveTasksToLocal() ? "Tasks are saved to local successfully!" : "error") << std::endl;
     
+    std::cout << "loading..." << std::endl;
+    tMan.LoadTasksFromLocal("saved-tasks.json");
+
+    for(int i=1; i<=5; i++)
+        try { std::cout << tMan.GetTask(i)->ToString() << std::endl; }
+        catch(const std::exception& e) { std::cout << "invalid task id: " << i << std::endl; }
+
+    // std::cout << Task::TmDateToStr(Task::StrToTmDate("25-11-2024")) << std::endl;
 }

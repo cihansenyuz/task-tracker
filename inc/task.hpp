@@ -6,10 +6,18 @@
 
 class Task{
     public:
-    Task(std::string descrp);
-
-    enum Status{ TODO, ONGOING, DONE };
+    enum Status{ INVALID, TODO, ONGOING, DONE };
     static std::string StatusToStr(Status s);
+    static Status StrToStatus(const std::string& s);
+    static std::tm StrToTmDate(const std::string& date);
+    static std::string TmDateToStr(const std::tm& date);
+
+    Task(std::string descrp); // for user creation
+    Task(int i,                 // for loading creation
+         const std::string& d,
+         Status s,
+         const std::tm& c,
+         const std::tm& u); 
 
     std::string ToString() const;
     boost::property_tree::ptree ToJson() const;
