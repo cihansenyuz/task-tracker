@@ -18,6 +18,7 @@ class TaskManager{
 
     const Task* GetTask(int id) const;
     std::vector<int> GetIdByStatus(Task::Status status) const;
+    std::vector<int> GetAllIds() const;
 
     private:
     std::forward_list<Task*> tasks;

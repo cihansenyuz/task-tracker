@@ -38,3 +38,11 @@ std::vector<int> TaskManager::GetIdByStatus(Task::Status status) const{
 
     return task_id_vector;
 }
+
+std::vector<int> TaskManager::GetAllIds() const{
+    std::vector<int> task_id_vector;
+    for(const auto& task : tasks)
+        task_id_vector.push_back(task->GetID());
+
+    return task_id_vector;
+}
