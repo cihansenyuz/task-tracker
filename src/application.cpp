@@ -66,7 +66,7 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
                                                                 };
 
     if(convertion_map.count(s) == 0)
-        throw std::invalid_argument{"invalid input provided! try again..."};
+        throw std::invalid_argument{"invalid input provided! try again or run app using --help"};
     
     return convertion_map[s];
 }
@@ -149,4 +149,25 @@ void Application::ListActionByStatus(Task::Status status){
     for(const auto& id : all_task_ids)
         std::cout << task_manager->GetTask(id)->ToString() << "####################"
                                                            << std::endl;
+}
+
+void Application::Help() const{
+    std::cout << "#################################" << std::endl;
+    std::cout << "## Welcome to the Task Manager ##" << std::endl;
+    std::cout << "#################################" << std::endl;
+    std::cout << "This application allows you to manage your tasks" << std::endl;
+    std::cout << "Here are the available actions you can perform:" << std::endl;
+    std::cout << "0. Quit - Exit the application." << std::endl;
+    std::cout << "1. Add a New Task - You will be prompted to enter a description for the new task." << std::endl;
+    std::cout << "2. Update a Task - You will need to enter the a valid task ID and then provide a new status and description." << std::endl
+              << "If you skip one and just update the other, simply enter empty to skip when it is prompted." << std::endl
+              << "To enter new status, enter one of those: TODO ONGOING DONE" << std::endl;
+    std::cout << "3. Delete a Task - Enter a valid task ID of the task you wish to delete." << std::endl;
+    std::cout << "4. List All Tasks - Displays all tasks currently in the system." << std::endl;
+    std::cout << "5. List Done Tasks - Shows tasks that are marked as done." << std::endl;
+    std::cout << "6. List Not Done Tasks - Displays tasks that are still pending." << std::endl;
+    std::cout << "7. List Ongoing Tasks - Shows tasks that are currently in progress." << std::endl;
+    std::cout << "To make a selection, simply enter the corresponding menu number and press Enter." << std::endl;
+    std::cout << "If you encounter any errors, the application will provide feedback to try again" << std::endl;
+    std::cout << "Enjoy managing your tasks!" << std::endl;
 }

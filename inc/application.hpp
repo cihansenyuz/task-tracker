@@ -22,6 +22,7 @@ class Application{
     ~Application();
     void Exec();
     void Quit();
+    void Help() const;
 
     private:
     bool running{false};
