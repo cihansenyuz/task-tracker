@@ -32,22 +32,25 @@ Application::Selection Application::GetUserInput() const{
     std::getline(std::cin, user_selection);
     try { return StrToSelection(user_selection); }
     catch(const std::exception& e){
-        std::cout << "Selection is not valid, try again..." << std::endl;
+        std::cout << "Error: " << e.what() << std::endl;
     }
 }
 
 void Application::ProcessSelection(Application::Selection user_selection){
-    switch (user_selection) {
-        case Selection::QUIT: running = false; break;
-        case Selection::ADD: AddAction(); break;
-        case Selection::UPDATE: UpdateAction(); break;
-        case Selection::DELETE: DeleteAction(); break;
-        case Selection::LIST_ALL: ListAllAction(); break;
-        case Selection::LIST_DONE: ListActionByStatus(Task::Status::DONE); break;
-        case Selection::LIST_NDONE: ListActionByStatus(Task::Status::TODO); 
-                                    ListActionByStatus(Task::Status::ONGOING); break;
-        case Selection::LIST_ONGOING: ListActionByStatus(Task::Status::ONGOING); break;
+    try {    
+        switch (user_selection) {
+            case Selection::QUIT: running = false; break;
+            case Selection::ADD: AddAction(); break;
+            case Selection::UPDATE: UpdateAction(); break;
+            case Selection::DELETE: DeleteAction(); break;
+            case Selection::LIST_ALL: ListAllAction(); break;
+            case Selection::LIST_DONE: ListActionByStatus(Task::Status::DONE); break;
+            case Selection::LIST_NDONE: ListActionByStatus(Task::Status::TODO); 
+                                        ListActionByStatus(Task::Status::ONGOING); break;
+            case Selection::LIST_ONGOING: ListActionByStatus(Task::Status::ONGOING); break;
+        }
     }
+    catch(const std::exception& e){ std::cout << "error: " << e.what() << std::endl; }
 }
 
 Application::Selection Application::StrToSelection(const std::string& s) const{
@@ -63,7 +66,7 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
                                                                 };
 
     if(convertion_map.count(s) == 0)
-        throw std::exception{}; // invalid input
+        throw std::invalid_argument{"invalid input provided! try again..."};
     
     return convertion_map[s];
 }
@@ -112,8 +115,19 @@ void Application::DeleteAction(){
     std::cout << "Enter the task id to delete: ";
     std::string input;
     std::getline(std::cin, input);
-    task_manager->DeleteTask(std::stoi(input));
-    std::cout << "Task is deleted." << std::endl;
+    int task_id = std::stoi(input);
+    auto selected_task = task_manager->GetTask(task_id);
+    std::cout << "to be deleted: " << std::endl
+              << selected_task->ToString() << std::endl
+              << "Confirm? y or n: ";
+    std::getline(std::cin, input);
+    if(input == "y"){
+        task_manager->DeleteTask(std::stoi(input));
+        std::cout << "The task deleted!" << std::endl;
+    }
+    else{
+        std::cout << "Cancelled." << std::endl;
+    }
 }
 
 void Application::ListAllAction(){

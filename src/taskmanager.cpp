@@ -39,7 +39,7 @@ const std::shared_ptr<Task> TaskManager::GetTask(int id) const{
         if(task->GetID() == id)
             return std::shared_ptr<Task>(task);
     
-    throw std::exception{}; // not found
+    throw std::runtime_error{"Task with ID " + std::to_string(id) + " not found"};
 }
 
 std::vector<int> TaskManager::GetIdByStatus(Task::Status status) const{
