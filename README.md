@@ -1,35 +1,41 @@
-# PROJECT INFORMATION
-This project is to do OOP practice using newer standards of the language C++.
+## PROJECT INFORMATION
+This project is a practical example of object-oriented programming using newer standards of the language C++.
+You can find CRC models of components in conceptual design pdf and UML class diagrams in technical design pdf
+under doc folder.
 
-The project bases on the project described here; https://roadmap.sh/projects/task-tracker
+The project based on the project described here; https://roadmap.sh/projects/task-tracker
 
-# PREREQUISITES
+## PREREQUISITES
 Make sure that g++ is installed on your machine and its version supports at least C++17.
 
-Make sure boost is installed on your machine. If not, run below code.
+Make sure boost is installed on your machine. If not, run the code below.
 
-$ sudo apt-get install libboost-all-dev
+`$ sudo apt-get install libboost-all-dev`
 
-# HOW TO RUN
-Projects includes a bash script to compile the project and run it.
+## HOW TO RUN
+The project includes a bash script to compile the project and run it. To run the script,
+run the code below to provide writing permissions, once your current working directory is the project directory.
+This is needed for the first time only.
 
-Simply run the following, once your current working directory is the project directory.
+`$ chmod +x compileNrun.sh`
 
-$ ./compileNrun.sh
+Then, run the following.
+
+`$ ./compileNrun.sh`
 
 Optionally, if you want to change something or try something as a developer,
 use the header file "devmode.hpp" and modify ExecDevMode() behaviour. Then,
 run the script, providing the flag -DDEVMODE. This will invoke ExecDevMode()
 function instead normal behaviour.
 
-$ ./compileNrun.sh -DDEVMODE
+`$ ./compileNrun.sh -DDEVMODE`
 
 To get help about how to use the application, pass --help argument to the application.
 This will print a guide for the application.
 
-$ ./app --help
+`$ ./app --help`
 
-# AUTHOR
+## AUTHOR
 This project is developed by Cihan Şenyüz in the Dec of 2024.
 
 Contact: cihansenyuz@hotmail.com
