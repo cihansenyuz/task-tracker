@@ -36,21 +36,9 @@ void Application::ProcessSelection(Application::Selection user_selection){
             case Selection::QUIT:
                 running = false;
                 break;
-            case Selection::ADD: {
-                std::cout << "Enter the description: ";
-                std::string input;
-                std::getline(std::cin, input);
-                int task_id = task_manager->AddTask(input);
-                std::cout << "Created task:" << std::endl;
-                std::cout << task_manager->GetTask(task_id)->ToString() << std::endl;
-                break;
-            }
-            case Selection::UPDATE:
-                /* code */
-                break;
-            case Selection::DELETE:
-                /* code */
-                break;
+            case Selection::ADD: AddAction(); break;
+            case Selection::UPDATE: UpdateAction(); break;
+            case Selection::DELETE: DeleteAction(); break;
             case Selection::LIST_ALL:
                 /* code */
                 break;
@@ -95,4 +83,43 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
 
  Application::~Application(){ 
     std::cout << "Quitting the app..." << std::endl;
+}
+
+void Application::AddAction(){
+    std::cout << "Enter the description: ";
+    std::string input;
+    std::getline(std::cin, input);
+    int task_id = task_manager->AddTask(input);
+    std::cout << "Created task:" << std::endl;
+    std::cout << task_manager->GetTask(task_id)->ToString() << std::endl;
+}
+
+void Application::UpdateAction(){
+    std::cout << "Enter the task id: ";
+    std::string input;
+    std::getline(std::cin, input);
+    auto selected_task = task_manager->GetTask(std::stoi(input));
+    std::cout << "Selected task:" << std::endl;
+    std::cout << selected_task->ToString() << std::endl;
+
+    UpdateInfo new_info;
+    std::cout << "Enter new status(TODO, ONGOING, DONE): ";
+    std::getline(std::cin, input);
+    new_info.status = Task::StrToStatus(input);
+
+    std::cout << "Enter new description: ";
+    std::getline(std::cin, input);
+    new_info.description = input;
+
+    task_manager->UpdateTask(selected_task->GetID(), new_info);
+    std::cout << "Updated task:" << std::endl;
+    std::cout << selected_task->ToString() << std::endl;
+}
+
+void Application::DeleteAction(){
+    std::cout << "Enter the task id to delete: ";
+    std::string input;
+    std::getline(std::cin, input);
+    task_manager->DeleteTask(std::stoi(input));
+    std::cout << "Task is deleted." << std::endl;
 }

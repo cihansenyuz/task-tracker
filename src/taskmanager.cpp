@@ -17,8 +17,11 @@ int TaskManager::AddTask(const std::string& description){
 bool TaskManager::UpdateTask(int id, UpdateInfo info){
     for(const auto& task : tasks)
         if(task->GetID() == id){
-            task->SetDescription(info.description);
-            task->SetStatus(info.status);
+            if(info.description.size())
+                task->SetDescription(info.description);
+            if(info.status != Task::INVALID)
+                task->SetStatus(info.status);
+            
             task->Updated();
             return true;
         }

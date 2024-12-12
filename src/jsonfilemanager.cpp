@@ -57,7 +57,7 @@ ptree JsonFileManager::LoadFile(const std::string& file_path) const{
         boost::property_tree::read_json(file_path, json_root);
     }
     catch (const std::exception& e) {
-        throw "couldnot read the json file";
+        throw "couldnot read or find the json file";
     }
 
     return json_root.get_child("tasks");

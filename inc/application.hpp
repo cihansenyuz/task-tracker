@@ -13,13 +13,18 @@ class Application{
 
     private:
     bool running{false};
-    enum Selection{ QUIT, ADD, UPDATE, DELETE,
-                LIST_ALL, LIST_DONE, LIST_NDONE, LIST_ONGOING };
     std::unique_ptr<TaskManager> task_manager;
 
+    enum Selection{ QUIT, ADD, UPDATE, DELETE,
+                LIST_ALL, LIST_DONE, LIST_NDONE, LIST_ONGOING };
+    Selection StrToSelection(const std::string& s) const;
+    
     void PrintMenu() const;
     Selection GetUserInput() const;
     void ProcessSelection(Selection user_selection);
-    Selection StrToSelection(const std::string& s) const;
+    
+    void AddAction();
+    void UpdateAction();
+    void DeleteAction();
 };
 

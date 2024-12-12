@@ -40,7 +40,7 @@ void ExecDevMode(){
         // for(const auto id : ids)
         //     std::cout << tMan.GetTask(id)->ToString() << std::endl;
 
-        for(int i=1; i<=5; i++)
+        for(int i=1; i<=8; i++)
             try {
                 std::cout << tMan.GetTask(i)->ToString() << std::endl;
                 std::cout << "use count: " << tMan.GetTask(i).use_count() << std::endl;
