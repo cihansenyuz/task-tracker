@@ -30,32 +30,23 @@ void Application::PrintMenu() const{
 Application::Selection Application::GetUserInput() const{
     std::string user_selection;
     std::getline(std::cin, user_selection);
-    return StrToSelection(user_selection);
+    try { return StrToSelection(user_selection); }
+    catch(const std::exception& e){
+        std::cout << "Selection is not valid, try again..." << std::endl;
+    }
 }
 
 void Application::ProcessSelection(Application::Selection user_selection){
-        try{
-        switch (user_selection) {
-            case Selection::QUIT:
-                running = false;
-                break;
-            case Selection::ADD: AddAction(); break;
-            case Selection::UPDATE: UpdateAction(); break;
-            case Selection::DELETE: DeleteAction(); break;
-            case Selection::LIST_ALL: ListAllAction(); break;
-            case Selection::LIST_DONE:
-                /* code */
-                break;
-            case Selection::LIST_NDONE:
-                /* code */
-                break;
-            case Selection::LIST_ONGOING:
-                /* code */
-                break;
-        }
-    }
-    catch(const std::exception& e){
-        std::cout << "Selection is not valid, try again: " << std::endl;
+    switch (user_selection) {
+        case Selection::QUIT: running = false; break;
+        case Selection::ADD: AddAction(); break;
+        case Selection::UPDATE: UpdateAction(); break;
+        case Selection::DELETE: DeleteAction(); break;
+        case Selection::LIST_ALL: ListAllAction(); break;
+        case Selection::LIST_DONE: ListActionByStatus(Task::Status::DONE); break;
+        case Selection::LIST_NDONE: ListActionByStatus(Task::Status::TODO); 
+                                    ListActionByStatus(Task::Status::ONGOING); break;
+        case Selection::LIST_ONGOING: ListActionByStatus(Task::Status::ONGOING); break;
     }
 }
 
@@ -130,6 +121,15 @@ void Application::ListAllAction(){
     std::cout << "###############" << std::endl
               << "## All tasks ##" << std::endl
               << "###############" << std::endl;
+    for(const auto& id : all_task_ids)
+        std::cout << task_manager->GetTask(id)->ToString() << "####################"
+                                                           << std::endl;
+}
+
+void Application::ListActionByStatus(Task::Status status){
+    auto all_task_ids = task_manager->GetIdByStatus(status);
+    std::cout << "## " << Task::StatusToStr(status) << " tasks ##" << std::endl;
+    
     for(const auto& id : all_task_ids)
         std::cout << task_manager->GetTask(id)->ToString() << "####################"
                                                            << std::endl;

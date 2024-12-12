@@ -27,5 +27,6 @@ class Application{
     void UpdateAction();
     void DeleteAction();
     void ListAllAction();
+    void ListActionByStatus(Task::Status status);
 };
 
