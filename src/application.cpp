@@ -39,7 +39,7 @@ Application::Selection Application::GetUserInput() const{
 void Application::ProcessSelection(Application::Selection user_selection){
     try {    
         switch (user_selection) {
-            case Selection::QUIT: running = false; break;
+            case Selection::QUIT: Quit(); break;
             case Selection::ADD: AddAction(); break;
             case Selection::UPDATE: UpdateAction(); break;
             case Selection::DELETE: DeleteAction(); break;
@@ -71,14 +71,16 @@ Application::Selection Application::StrToSelection(const std::string& s) const{
     return convertion_map[s];
 }
 
- Application::Application(const std::string& file_path)
+Application::Application(const std::string& file_path)
     : task_manager{std::make_unique<TaskManager>(file_path)} {
     std::cout << "Loading the app..." << std::endl;
 }
 
- Application::~Application(){ 
+Application::~Application(){ 
     std::cout << "Quitting the app..." << std::endl;
 }
+
+void Application::Quit() { running = false; }
 
 void Application::AddAction(){
     std::cout << "Enter the description: ";
