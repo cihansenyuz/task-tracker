@@ -4,6 +4,18 @@
 #include <string>
 #include <memory>
 
+/**
+ * A task management system that provides a menu-driven interface
+ * for interacting with tasks. It supports core operations like
+ * adding, updating, deleting, and listing tasks through an enumerated
+ * selection menu, utilizing a TaskManager to handle the underlying
+ * task data. The class is designed to manage the application's state
+ * and provide a comprehensive, interactive experience for users to
+ * manipulate and view their tasks efficiently.
+ * 
+ * @author Cihan Şenyüz
+ * @date Dec-2024
+ */
 class Application{
     public:
     Application(const std::string& f);

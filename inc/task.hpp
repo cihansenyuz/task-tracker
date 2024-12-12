@@ -4,6 +4,17 @@
 #include <chrono>
 #include <boost/property_tree/ptree.hpp>
 
+/**
+ * represents a task management system with properties like ID, description,
+ * status, creation, and update times. It provides static utility methods
+ * for converting between string and status representations, as well as
+ * date handling. The class supports creating tasks either by user input
+ * or when loading from a persistent storage, with methods to get and set
+ * task attributes, convert to string or JSON format, and track the last used ID.
+ * 
+ * @author Cihan Şenyüz
+ * @date Dec-2024
+ */
 class Task{
     public:
     enum Status{ INVALID, TODO, ONGOING, DONE };
@@ -43,7 +54,4 @@ class Task{
     Status status;
     std::tm created;
     std::tm updated;
-
-    
-
 };

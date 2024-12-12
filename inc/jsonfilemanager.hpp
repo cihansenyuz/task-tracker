@@ -6,6 +6,17 @@
 
 using boost::property_tree::ptree;
 
+/**
+ * @brief Responsible for managing task persistence by providing methods
+ * to save and load tasks to/from local JSON files. It maintains a
+ * pointer to a list of shared task pointers and includes methods
+ * for parsing JSON task data and loading files. The class acts as
+ * a bridge between the task collection and file storage, facilitating
+ * serialization and deserialization of task data.
+ * 
+ * @author Cihan Şenyüz
+ * @date Dec-2024
+ */
 class JsonFileManager{
     public:
     JsonFileManager(std::forward_list<std::shared_ptr<Task>>* t);
