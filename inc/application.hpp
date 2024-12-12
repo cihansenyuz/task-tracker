@@ -26,5 +26,6 @@ class Application{
     void AddAction();
     void UpdateAction();
     void DeleteAction();
+    void ListAllAction();
 };
 

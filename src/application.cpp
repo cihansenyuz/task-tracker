@@ -12,7 +12,9 @@ void Application::Exec(){
 }
 
 void Application::PrintMenu() const{
-    std::cout << "Menu:" << std::endl;
+    std::cout << "######################" << std::endl
+              << "## Application Menu ##" << std::endl
+              << "######################" << std::endl;
     std::cout << "0. Quit" << std::endl;
     std::cout << "1. Add a New" << std::endl;
     std::cout << "2. Update a Task" << std::endl;
@@ -21,6 +23,7 @@ void Application::PrintMenu() const{
     std::cout << "5. List Done Tasks" << std::endl;
     std::cout << "6. List Not Done Tasks" << std::endl;
     std::cout << "7. List Ongoing Tasks" << std::endl;
+    std::cout << "######################" << std::endl;
     std::cout << "Enter your selection: ";
 }
 
@@ -39,9 +42,7 @@ void Application::ProcessSelection(Application::Selection user_selection){
             case Selection::ADD: AddAction(); break;
             case Selection::UPDATE: UpdateAction(); break;
             case Selection::DELETE: DeleteAction(); break;
-            case Selection::LIST_ALL:
-                /* code */
-                break;
+            case Selection::LIST_ALL: ListAllAction(); break;
             case Selection::LIST_DONE:
                 /* code */
                 break;
@@ -122,4 +123,14 @@ void Application::DeleteAction(){
     std::getline(std::cin, input);
     task_manager->DeleteTask(std::stoi(input));
     std::cout << "Task is deleted." << std::endl;
+}
+
+void Application::ListAllAction(){
+    auto all_task_ids = task_manager->GetAllIds();
+    std::cout << "###############" << std::endl
+              << "## All tasks ##" << std::endl
+              << "###############" << std::endl;
+    for(const auto& id : all_task_ids)
+        std::cout << task_manager->GetTask(id)->ToString() << "####################"
+                                                           << std::endl;
 }
