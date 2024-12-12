@@ -4,6 +4,8 @@ The project bases on the project described here; https://roadmap.sh/projects/tas
 
 # PREREQUISITES
 Make sure that g++ is installed on your machine and its version supports at least C++17.
+Make sure boost is installed on your machine. If not, run below code.
+$ sudo apt-get install libboost-all-dev
 
 # HOW TO RUN
 Projects includes a bash script to compile the project and run it.
