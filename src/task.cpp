@@ -10,11 +10,7 @@ Task::Task(std::string d)
     auto now = std::chrono::system_clock::now(); // get current time
     std::time_t current_time = std::chrono::system_clock::to_time_t(now); // convert to time_t
     created = *std::localtime(&current_time);
-    ////////////////////////
-    created.tm_mday -= 3; // debug purposed
-    ////////////////////////
     updated = created;
-
 }
 
 Task::Task(int i,

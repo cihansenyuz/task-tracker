@@ -12,6 +12,19 @@ Make sure boost is installed on your machine. If not, run the code below.
 
 `$ sudo apt-get install libboost-all-dev`
 
+Make sure gTest is installed on your machine. If not, run the code below.
+
+`$ sudo apt install libgtest-dev`
+
+You may need to manually build the gtest libraries after installing the libgtest-dev package. You will need to have cmake and GNU make.
+
+```
+cd /usr/src/gtest
+sudo cmake .
+sudo make
+sudo cp *.a /usr/lib
+```
+
 ## HOW TO RUN
 The project includes a bash script to compile the project and run it. To run the script,
 run the code below to provide writing permissions, once your current working directory is the project directory.
@@ -34,6 +47,13 @@ To get help about how to use the application, pass --help argument to the applic
 This will print a guide for the application.
 
 `$ ./app --help`
+
+## HOW TO TEST
+The project uses gTest to do unit testing. Test sources is under gTest folder.
+The folder includes compileNrun-test.sh script to compile and start testing.
+# Note: Test is only for Task component. This is subject to change, including other components.
+
+`$ ./compileNrun-test.sh`
 
 ## AUTHOR
 This project is developed by Cihan Şenyüz in the Dec of 2024.
