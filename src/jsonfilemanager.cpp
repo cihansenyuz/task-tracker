@@ -24,7 +24,10 @@ bool JsonFileManager::SaveTasksToLocal(const std::string& file_path) const{
 }
 
 bool JsonFileManager::LoadTasksFromLocal(const std::string& file_path){
-    ptree file = LoadFile(file_path);
+    ptree file;
+    try { file = LoadFile(file_path); } // if cannot read
+    catch (const std::exception& e) { file = ptree(); } // create empty one.
+
     int last_id = 0;
 
     for(const auto& task : file){
@@ -57,7 +60,7 @@ ptree JsonFileManager::LoadFile(const std::string& file_path) const{
         boost::property_tree::read_json(file_path, json_root);
     }
     catch (const std::exception& e) {
-        throw "couldnot read or find the json file";
+        throw std::runtime_error("could not read or find the json file");
     }
 
     return json_root.get_child("tasks");
