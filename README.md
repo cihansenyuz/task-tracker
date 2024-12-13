@@ -51,7 +51,6 @@ This will print a guide for the application.
 ## HOW TO TEST
 The project uses gTest to do unit testing. Test sources is under gTest folder.
 The folder includes compileNrun-test.sh script to compile and start testing.
-# Note: Test is only for Task component. This is subject to change, including other components.
 
 `$ ./compileNrun-test.sh`
 
