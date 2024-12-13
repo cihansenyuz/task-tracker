@@ -1,0 +1,25 @@
+{
+    "tasks": [
+        {
+            "id": "3",
+            "description": "New Task by AddTask",
+            "status": "TODO",
+            "created date": "13-12-2024\n",
+            "last update": "13-12-2024\n"
+        },
+        {
+            "id": "2",
+            "description": "Updated again",
+            "status": "ONGOING",
+            "created date": "13-12-2024\n",
+            "last update": "13-12-2024\n"
+        },
+        {
+            "id": "1",
+            "description": "Initial Task 1",
+            "status": "TODO",
+            "created date": "13-12-2024\n",
+            "last update": "13-12-2024\n"
+        }
+    ]
+}
